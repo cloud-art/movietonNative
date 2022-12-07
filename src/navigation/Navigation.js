@@ -2,7 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homescreen from '../screens/Homescreen';
+import Homescreen from '../screens/Homescreen/Homescreen';
 import Profile from '../screens/Profile';
 import Search from '../screens/Search';
 
@@ -16,11 +16,11 @@ export default function Navigation() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === 'Homescreen') {
-              iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
-            } else if (route.name === 'Search') {
+            if (route.name === 'Медиа') {
+              iconName = focused ? 'ios-film' : 'ios-film-outline';
+            } else if (route.name === 'Поиск') {
               iconName = focused ? 'ios-search' : 'ios-search-outline';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'Профиль') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-circle-outline';
             }
 
@@ -30,9 +30,33 @@ export default function Navigation() {
           tabBarInactiveTintColor: 'gray'
         })}
       >
-        <Tab.Screen name="Homescreen" component={Homescreen} options={{ headerShown: false }} />
-        <Tab.Screen name="Search" component={Search} options={{ headerShown: false }} />
-        <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+        <Tab.Screen
+          name="Медиа"
+          component={Homescreen}
+          options={
+            {
+              // headerShown: false
+            }
+          }
+        />
+        <Tab.Screen
+          name="Поиск"
+          component={Search}
+          options={
+            {
+              // headerShown: false
+            }
+          }
+        />
+        <Tab.Screen
+          name="Профиль"
+          component={Profile}
+          options={
+            {
+              // headerShown: false
+            }
+          }
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
