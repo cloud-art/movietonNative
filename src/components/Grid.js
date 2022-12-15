@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
+import { Link } from '@react-navigation/native';
 import Dotdotdot from 'react-clamp';
 
 const Grid = ({ list }) => {
@@ -7,14 +8,18 @@ const Grid = ({ list }) => {
       {list.map((e) => {
         return (
           <View style={styles.gridElement} key={e.id}>
-            <Image
-              style={styles.img}
-              source={{
-                uri: e.posterUrlPreview
-              }}
-            />
+            <Link to={{ screen: 'Film', params: { film: e } }}>
+              <Image
+                style={styles.img}
+                source={{
+                  uri: e.posterUrlPreview
+                }}
+              />
+            </Link>
             <Dotdotdot clamp="2">
-              <Text style={styles.item}>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
+              <Link to={{ screen: 'Film', params: { id: e.filmId } }}>
+                <Text style={styles.item}>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
+              </Link>
             </Dotdotdot>
           </View>
         );

@@ -60,4 +60,18 @@ async function getReleasedFilmsLastMonth(page) {
     .catch((err) => console.log(err));
 }
 
-export { getFilms, getPopularFilms, getPopularFilmsLastYear, getReleasedFilmsLastMonth };
+async function getFilmsByKeyword(page, keyword) {
+  return fetch(`${api_urlV2_2}${films_url}/?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&keyword=${keyword}&page=${page}`, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': API_KEY,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => console.log(err));
+}
+
+export { getFilms, getPopularFilms, getPopularFilmsLastYear, getReleasedFilmsLastMonth, getFilmsByKeyword };

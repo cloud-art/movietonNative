@@ -9,7 +9,7 @@ export default function Homescreen() {
   const [popularFilmsLastYear, setPopularFilmsLastYear] = useState([]);
   const [releasedFilms, setReleasedFilms] = useState([]);
 
-  console.log(releasedFilms);
+  // console.log(releasedFilms);
 
   useEffect(() => {
     getPopularFilms(1)
