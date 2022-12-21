@@ -11,16 +11,16 @@ export default function Search() {
 
   const searchHandler = () => {
     setSearchToggle(!searchToggle);
-    setKeyword('');
   };
 
   useEffect(() => {
-    console.log(films);
     getFilmsByKeyword(1, keyword)
       .then((data) => {
+        console.log(data);
         setFilms(data.items.slice());
       })
       .catch((err) => console.log(err));
+    setKeyword('');
   }, [searchToggle]);
 
   return (

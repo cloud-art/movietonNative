@@ -6,9 +6,7 @@ const FilmList = ({ filmList }) => {
   const [fList, setFList] = useState([]);
   useEffect(() => {
     filmList ? setFList(filmList) : true;
-    console.log(fList);
-    console.log(filmList);
-  }, []);
+  }, [filmList]);
 
   return (
     <View style={styles.list}>
@@ -23,7 +21,7 @@ const FilmList = ({ filmList }) => {
                 }}
               />
             </Link>
-            <Link style={styles.item} to={{ screen: 'Film', params: { id: e.filmId } }}>
+            <Link style={styles.item} to={{ screen: 'Film', params: { film: e } }}>
               <Text>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
             </Link>
           </View>
