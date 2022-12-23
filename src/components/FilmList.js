@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { Link } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
+import NotFoundText from './NotFoundText';
 
 const FilmList = ({ filmList }) => {
   const [fList, setFList] = useState([]);
@@ -31,7 +32,7 @@ const FilmList = ({ filmList }) => {
           })}
         </View>
       ) : (
-        <Text style={styles.notFound}>Ничего не найдено</Text>
+        <NotFoundText></NotFoundText>
       )}
     </>
   );

@@ -12,11 +12,11 @@ export default function Homescreen() {
   // console.log(releasedFilms);
 
   useEffect(() => {
-    getPopularFilms(1)
-      .then((data) => {
-        setPopularFilms(data.items.slice());
-      })
-      .catch((err) => console.log(err));
+    // getPopularFilms(1)
+    //   .then((data) => {
+    //     setPopularFilms(data.items.slice());
+    //   })
+    //   .catch((err) => console.log(err));
 
     getPopularFilmsLastYear(1)
       .then((data) => {
