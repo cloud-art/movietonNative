@@ -9,33 +9,41 @@ const FilmList = ({ filmList }) => {
   }, [filmList]);
 
   return (
-    <View style={styles.list}>
-      {fList.map((e) => {
-        return (
-          <View style={styles.listElement} key={e.id}>
-            <Link to={{ screen: 'Film', params: { film: e } }}>
-              <Image
-                style={styles.img}
-                source={{
-                  uri: e.posterUrlPreview
-                }}
-              />
-            </Link>
-            <Link style={styles.item} to={{ screen: 'Film', params: { film: e } }}>
-              <Text>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
-            </Link>
-          </View>
-        );
-      })}
-    </View>
+    <>
+      {filmList.length > 0 ? (
+        <View style={styles.list}>
+          {fList.map((e) => {
+            return (
+              <View style={styles.listElement} key={e.id}>
+                <Link to={{ screen: 'Film', params: { film: e } }}>
+                  <Image
+                    style={styles.img}
+                    source={{
+                      uri: e.posterUrlPreview
+                    }}
+                  />
+                </Link>
+                <Link style={styles.item} to={{ screen: 'Film', params: { film: e } }}>
+                  <Text style={styles.itemName}>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
+                </Link>
+              </View>
+            );
+          })}
+        </View>
+      ) : (
+        <Text style={styles.notFound}>Ничего не найдено</Text>
+      )}
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  list: {},
-  listElement: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '20px' },
-  img: { width: '140px', height: '200px', alignSelf: 'flex-start', marginBottom: '3px' },
-  item: { alignSelf: 'center', textAlign: 'center' }
+  list: { width: '100%' },
+  listElement: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' },
+  img: { width: '250px', height: '400px', alignSelf: 'flex-start', marginBottom: '3px' },
+  item: { alignSelf: 'center', textAlign: 'center' },
+  itemName: { fontSize: '24px' },
+  notFound: { fontSize: '32px', alignSelf: 'center' }
 });
 
 export default FilmList;

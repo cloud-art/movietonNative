@@ -17,7 +17,7 @@ const Grid = ({ list }) => {
               />
             </Link>
             <Dotdotdot clamp="2">
-              <Link to={{ screen: 'Film', params: { id: e.filmId } }}>
+              <Link to={{ screen: 'Film', params: { film: e } }}>
                 <Text style={styles.item}>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
               </Link>
             </Dotdotdot>

@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height
   },
-  img: { width: '50%', height: '400px', alignSelf: 'center', marginBottom: '3px' },
-  label: { fontSize: '28px', alignSelf: 'center' },
+  img: { width: '300px', height: '500px', alignSelf: 'center', marginBottom: '3px' },
+  label: { fontSize: '48px', alignSelf: 'center', textAlign: 'center' },
   filmProps: { marginLeft: '20px' },
-  filmPropsLabel: { padding: '5px', fontSize: '22px', fontWeight: 'bold' },
-  filmPropsText: { fontSize: '18px' }
+  filmPropsLabel: { padding: '5px', fontSize: '32px', fontWeight: 'bold' },
+  filmPropsText: { fontSize: '24px' }
 });
 
 export default FilmScreen;

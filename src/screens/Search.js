@@ -26,10 +26,10 @@ export default function Search() {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <TextInput value={keyword} onChangeText={setKeyword} style={styles.searchInput}></TextInput>
-        <Button onPress={searchHandler} style={styles.searchSubmit} title="Поиск"></Button>
+        <TextInput onSubmitEditing={searchHandler} value={keyword} onChangeText={setKeyword} style={styles.searchInput}></TextInput>
+        {/* <Button onPress={searchHandler} style={styles.searchSubmit} title="Поиск"></Button> */}
       </View>
-      <FilmList filmList={films}></FilmList>
+      <FilmList style={styles.filmList} filmList={films}></FilmList>
     </View>
   );
 }
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height
   },
-  top: { display: 'flex', flexDirection: 'row', width: '100%' },
-  searchInput: { width: '100%', paddingLeft: '10px', paddingRight: '10px', marginRight: '5px', borderColor: '0A1C34', borderWidth: '1px' }
+  top: { display: 'flex', flexDirection: 'column', width: '100%' },
+  filmList: { alignSelf: 'center' },
+  searchInput: { height: '70px', width: '100%', paddingLeft: '10px', paddingRight: '10px', marginRight: '5px', marginBottom: '5px', borderColor: '0A1C34', borderWidth: '1px' }
 });
