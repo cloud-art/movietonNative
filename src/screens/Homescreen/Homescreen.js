@@ -1,41 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { getPopularFilms, getPopularFilmsLastYear, getReleasedFilmsLastMonth } from '../../services/MovietonService';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopularFilms, fetchPopularFilmsLastYear, fetchReleasedFilms } from '../../services/MovietonService';
 import NewFilms from './components/NewFilms';
 
 export default function Homescreen() {
-  const [popularFilms, setPopularFilms] = useState([]);
-  const [popularFilmsLastYear, setPopularFilmsLastYear] = useState([]);
-  const [releasedFilms, setReleasedFilms] = useState([]);
+  const dispatch = useDispatch();
 
-  // console.log(releasedFilms);
+  const popularFilms = useSelector((state) => state.popularFilms);
+  const popularFilmsLastYear = useSelector((state) => state.popularFilmsLastYear);
+  const releasedFilms = useSelector((state) => state.releasedFilms);
 
   useEffect(() => {
-    // getPopularFilms(1)
-    //   .then((data) => {
-    //     setPopularFilms(data.items.slice());
-    //   })
-    //   .catch((err) => console.log(err));
-
-    getPopularFilmsLastYear(1)
-      .then((data) => {
-        setPopularFilmsLastYear(data.items.slice());
-      })
-      .catch((err) => console.log(err));
-
-    getReleasedFilmsLastMonth(1)
-      .then((data) => {
-        setReleasedFilms(data.releases.slice());
-      })
-      .catch((err) => console.log(err));
+    dispatch(fetchPopularFilms());
+    dispatch(fetchPopularFilmsLastYear());
+    dispatch(fetchReleasedFilms());
   }, []);
 
   return (
     <View style={styles.container}>
-      <NewFilms title={'Популярное'} list={popularFilms} />
-      <NewFilms title={'Лучшее за последний год'} list={popularFilmsLastYear} />
-      <NewFilms title={'Релизы'} list={releasedFilms} />
+      <NewFilms title={'Популярное'} list={popularFilms.items} />
+      <NewFilms title={'Лучшее за последний год'} list={popularFilmsLastYear.items} />
+      <NewFilms title={'Релизы'} list={releasedFilms.items} />
       <StatusBar style="auto" />
     </View>
   );

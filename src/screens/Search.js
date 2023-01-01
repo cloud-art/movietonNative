@@ -1,35 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Dimensions } from 'react-native';
-import { getFilmsByKeyword } from '../services/MovietonService';
+
 import FilmList from '../components/FilmList';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSearchFilms } from '../services/MovietonService';
 
 export default function Search() {
-  const [keyword, setKeyword] = useState('');
-  const [films, setFilms] = useState([]);
-  const [searchToggle, setSearchToggle] = useState(true);
+  const dispatch = useDispatch();
 
+  const [keyword, setKeyword] = useState('');
+  const [searchToggle, setSearchToggle] = useState(true);
+  const searchFilms = useSelector((state) => state.searchFilms);
   const searchHandler = () => {
     setSearchToggle(!searchToggle);
   };
 
   useEffect(() => {
-    getFilmsByKeyword(1, keyword)
-      .then((data) => {
-        console.log(data);
-        setFilms(data.items.slice());
-      })
-      .catch((err) => console.log(err));
-    setKeyword('');
+    dispatch(fetchSearchFilms(keyword));
   }, [searchToggle]);
 
   return (
     <View style={styles.container}>
       <View style={styles.top}>
         <TextInput onSubmitEditing={searchHandler} value={keyword} onChangeText={setKeyword} style={styles.searchInput}></TextInput>
-        {/* <Button onPress={searchHandler} style={styles.searchSubmit} title="Поиск"></Button> */}
       </View>
-      <FilmList style={styles.filmList} filmList={films}></FilmList>
+      <FilmList style={styles.filmList} filmList={searchFilms.items}></FilmList>
     </View>
   );
 }

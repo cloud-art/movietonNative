@@ -1,77 +1,85 @@
-const api_urlV2_2 = 'https://kinopoiskapiunofficial.tech/api/v2.2';
-const api_urlV2_1 = 'https://kinopoiskapiunofficial.tech/api/v2.1';
-const films_url = '/films';
-const API_KEY = '5b334fb3-43d9-4391-96d9-4333cbe171be';
+import { setPopularFilms, setPopularFilmsLastYear, setReleasedFilms, setSearchFilms } from '../store/actions';
 
-async function getFilms(page) {
-  return fetch(`${api_urlV2_2}${films_url}?page=${page}`, {
-    method: 'GET',
-    body: null,
-    headers: {
-      'X-API-KEY': API_KEY,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((res) => {
-      return res.json();
+import { FILMS_URL, API_URLV2_2, API_URLV2_1, API_KEY } from './constants';
+
+// async function getFilms(page) {
+//   return fetch(`${API_URLV2_2}${FILMS_URL}?page=${page}`, {
+//     method: 'GET',
+//     body: null,
+//     headers: {
+//       'X-API-KEY': API_KEY,
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .catch((err) => console.log(err));
+// }
+
+export const fetchPopularFilms = () => {
+  return function (dispatch) {
+    fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&page=1`, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': '5b334fb3-43d9-4391-96d9-4333cbe171be',
+        'Content-Type': 'application/json'
+      }
     })
-    .catch((err) => console.log(err));
-}
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(setPopularFilms(json));
+      })
+      .catch((err) => console.log(err));
+  };
+};
 
-async function getPopularFilms(page) {
-  return fetch(`${api_urlV2_2}${films_url}?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&page=${page}`, {
-    method: 'GET',
-    headers: {
-      'X-API-KEY': API_KEY,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((res) => {
-      return res.json();
+export const fetchPopularFilmsLastYear = () => {
+  return function (dispatch) {
+    fetch(`${API_URLV2_2}${FILMS_URL}?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2022&yearTo=2022&page=1`, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': API_KEY,
+        'Content-Type': 'application/json'
+      }
     })
-    .catch((err) => console.log(err));
-}
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(setPopularFilmsLastYear(json));
+      })
+      .catch((err) => console.log(err));
+  };
+};
 
-async function getPopularFilmsLastYear(page) {
-  return fetch(`${api_urlV2_2}${films_url}?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2022&yearTo=2022&page=${page}`, {
-    method: 'GET',
-    headers: {
-      'X-API-KEY': API_KEY,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((res) => {
-      return res.json();
+export const fetchReleasedFilms = () => {
+  return function (dispatch) {
+    fetch(`${API_URLV2_1}${FILMS_URL}/releases?year=2022&month=JANUARY&page=1`, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': API_KEY,
+        'Content-Type': 'application/json'
+      }
     })
-    .catch((err) => console.log(err));
-}
-
-async function getReleasedFilmsLastMonth(page) {
-  return fetch(`${api_urlV2_1}${films_url}/releases?year=2022&month=JANUARY&page=${page}`, {
-    method: 'GET',
-    headers: {
-      'X-API-KEY': API_KEY,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((res) => {
-      return res.json();
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(setReleasedFilms(json));
+      })
+      .catch((err) => console.log(err));
+  };
+};
+export const fetchSearchFilms = (keyword) => {
+  return function (dispatch) {
+    fetch(`${API_URLV2_2}${FILMS_URL}/?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&keyword=${keyword}&page=1`, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': API_KEY,
+        'Content-Type': 'application/json'
+      }
     })
-    .catch((err) => console.log(err));
-}
-
-async function getFilmsByKeyword(page, keyword) {
-  return fetch(`${api_urlV2_2}${films_url}/?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&keyword=${keyword}&page=${page}`, {
-    method: 'GET',
-    headers: {
-      'X-API-KEY': API_KEY,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => console.log(err));
-}
-
-export { getFilms, getPopularFilms, getPopularFilmsLastYear, getReleasedFilmsLastMonth, getFilmsByKeyword };
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(setSearchFilms(json));
+      })
+      .catch((err) => console.log(err));
+  };
+};
