@@ -15,7 +15,7 @@ const FilmList = ({ filmList }) => {
         <View style={styles.list}>
           {fList.map((e) => {
             return (
-              <View style={styles.listElement} key={e.id}>
+              <View style={styles.listElement} key={e.kinopoiskId ? e.kinopoiskId : e.filmId}>
                 <Link to={{ screen: 'Film', params: { film: e } }}>
                   <Image
                     style={styles.img}

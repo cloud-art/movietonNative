@@ -1,28 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPopularFilms, fetchPopularFilmsLastYear, fetchReleasedFilms } from '../../services/MovietonService';
-import NewFilms from './components/NewFilms';
+import { fetchFrontPremieres, fetchPopularFrontFilms, fetchTopFrontFilms } from '../../services/MovietonService';
+import ItemsTail from './components/ItemsTail';
 
 export default function Homescreen() {
   const dispatch = useDispatch();
 
-  const popularFilms = useSelector((state) => state.popularFilms);
-  const popularFilmsLastYear = useSelector((state) => state.popularFilmsLastYear);
-  const releasedFilms = useSelector((state) => state.releasedFilms);
+  const popularFilms = useSelector((state) => state.popularFilms.frontItems);
+  const topFilms = useSelector((state) => state.topFilms.frontItems);
+  const premieres = useSelector((state) => state.premieres.frontItems);
 
   useEffect(() => {
-    dispatch(fetchPopularFilms());
-    dispatch(fetchPopularFilmsLastYear());
-    dispatch(fetchReleasedFilms());
+    dispatch(fetchPopularFrontFilms());
+    dispatch(fetchTopFrontFilms());
+    dispatch(fetchFrontPremieres());
   }, []);
 
   return (
     <View style={styles.container}>
-      <NewFilms title={'Популярное'} list={popularFilms.items} />
-      <NewFilms title={'Лучшее за последний год'} list={popularFilmsLastYear.items} />
-      <NewFilms title={'Релизы'} list={releasedFilms.items} />
+      <ItemsTail title={'Популярное'} films={popularFilms} link={{ screen: 'Populars' }} />
+      <ItemsTail title={'Лучшие фильмы'} films={topFilms} link={{ screen: 'TopFilms' }} />
+      <ItemsTail title={'Премьеры'} films={premieres} link={{ screen: 'Premieres' }} />
       <StatusBar style="auto" />
     </View>
   );

@@ -2,8 +2,10 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homescreen from '../screens/Homescreen/Homescreen';
 import Search from '../screens/Search';
-import FilmScreen from '../screens/FilmScreen';
-import FilmListScreen from '../screens/FilmListScreen';
+import Film from '../screens/Film';
+import Populars from '../screens/Populars';
+import Premieres from '../screens/Premieres';
+import TopFilms from '../screens/TopFilms';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -19,14 +21,28 @@ function HomeStackScreen() {
       />
       <HomeStack.Screen
         name="Film"
-        component={FilmScreen}
+        component={Film}
         options={{
           headerShown: false
         }}
       />
       <HomeStack.Screen
-        name="FilmList"
-        component={FilmListScreen}
+        name="Populars"
+        component={Populars}
+        options={{
+          headerShown: false
+        }}
+      />
+      <HomeStack.Screen
+        name="Premieres"
+        component={Premieres}
+        options={{
+          headerShown: false
+        }}
+      />
+      <HomeStack.Screen
+        name="TopFilms"
+        component={TopFilms}
         options={{
           headerShown: false
         }}
@@ -49,7 +65,7 @@ function SearchStackScreen() {
       />
       <SearchStack.Screen
         name="Film"
-        component={FilmScreen}
+        component={Film}
         options={{
           headerShown: false
         }}

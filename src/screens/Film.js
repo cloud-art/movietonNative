@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
-const FilmScreen = ({ route }) => {
+const Film = ({ route }) => {
   const [filmInfo, setFilmInfo] = useState('undefined');
 
   useEffect(() => {
@@ -21,15 +21,6 @@ const FilmScreen = ({ route }) => {
         <Text style={styles.filmPropsLabel}>Оригинальное название</Text>
         <Text style={styles.filmPropsText}>{filmInfo.nameOriginal}</Text>
       </View>
-
-      {/* <View style={styles.filmProps}>
-        <Text style={styles.filmPropsLabel}>Жанры</Text>
-        <View style={styles.filmGenres}>
-          {filmInfo.genres.map((e) => {
-            return <Text style={styles.filmPropsText}>{e.genre}</Text>;
-          })}
-        </View>
-      </View> */}
 
       <View style={styles.filmProps}>
         <Text style={styles.filmPropsLabel}>Год</Text>
@@ -67,4 +58,4 @@ const styles = StyleSheet.create({
   filmPropsText: { fontSize: '24px' }
 });
 
-export default FilmScreen;
+export default Film;

@@ -3,16 +3,16 @@ import { Link } from '@react-navigation/native';
 import Grid from '../../../components/Grid';
 import Title from '../../../components/Title';
 
-const NewFilms = ({ title, list }) => {
+const ItemsTail = ({ title, films, link }) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
         <Title name={title}></Title>
-        <Link style={styles.btn} to={{ screen: 'FilmList', params: { list: list } }}>
+        <Link style={styles.btn} to={link}>
           <Text>Смотреть все</Text>
         </Link>
       </View>
-      <Grid list={list}></Grid>
+      <Grid films={films} key={title}></Grid>
     </View>
   );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   top: { display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }
 });
 
-export default NewFilms;
+export default ItemsTail;

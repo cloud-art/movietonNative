@@ -3,14 +3,14 @@ import { Link } from '@react-navigation/native';
 import Dotdotdot from 'react-clamp';
 import NotFoundText from './NotFoundText';
 
-const Grid = ({ list }) => {
+const Grid = ({ films, keyGenerateWord }) => {
   return (
     <>
-      {list.length > 0 ? (
+      {films.length > 0 ? (
         <View style={styles.grid}>
-          {list.map((e) => {
+          {films.map((e) => {
             return (
-              <View style={styles.gridElement} key={e.id}>
+              <View style={styles.gridElement} key={films.length + e.kinopoiskId ? e.kinopoiskId : e.filmId}>
                 <Link to={{ screen: 'Film', params: { film: e } }}>
                   <Image
                     style={styles.img}
