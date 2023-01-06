@@ -12,7 +12,7 @@ const ItemsTail = ({ title, films, link }) => {
           <Text>Смотреть все</Text>
         </Link>
       </View>
-      <Grid films={films} key={title}></Grid>
+      <Grid films={films} keyGenerateWord={title}></Grid>
     </View>
   );
 };
