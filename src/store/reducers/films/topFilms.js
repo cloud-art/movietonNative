@@ -2,7 +2,8 @@ import { SET_TOP_FILMS, SET_TOP_FRONT_FILMS } from '../../constants';
 
 const initialState = {
   items: [],
-  frontItems: []
+  frontItems: [],
+  totalPages: 1
 };
 
 export const topFilmsReducer = (state = initialState, action) => {
@@ -10,7 +11,8 @@ export const topFilmsReducer = (state = initialState, action) => {
     case SET_TOP_FILMS:
       return {
         ...state,
-        items: [...action.payload.films]
+        items: [...action.payload.films],
+        totalPages: action.payload.pagesCount ? action.payload.pagesCount : 1
       };
     case SET_TOP_FRONT_FILMS:
       return {

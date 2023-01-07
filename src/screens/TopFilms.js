@@ -11,7 +11,7 @@ const TopFilms = () => {
   const viewRef = useRef();
 
   const filmList = useSelector((state) => state.topFilms.items);
-
+  const totalPages = useSelector((state) => state.topFilms.totalPages);
   const pagination = useSelector((state) => state.pagination.page);
 
   const { setPagination } = useActions();
@@ -36,7 +36,7 @@ const TopFilms = () => {
       <Text style={styles.label}>Топ фильмов: </Text>
       <FilmList filmList={filmList}></FilmList>
       <View style={styles.bottom}>
-        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore}></Pagination>
+        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
     </View>
   );

@@ -11,12 +11,13 @@ import { useActions } from '../hooks/useActions';
 export default function Search() {
   const dispatch = useDispatch();
   const viewRef = useRef();
-  const pagination = useSelector((state) => state.pagination.page);
 
+  const pagination = useSelector((state) => state.pagination.page);
   const { setPagination } = useActions();
 
   const [keyword, setKeyword] = useState('');
-  const searchFilms = useSelector((state) => state.searchFilms);
+  const totalPages = useSelector((state) => state.searchFilms.totalPages);
+  const searchFilms = useSelector((state) => state.searchFilms.items);
   const searchHandler = () => {
     dispatch(fetchSearchFilms(pagination, keyword));
   };
@@ -40,9 +41,9 @@ export default function Search() {
       <View style={styles.top}>
         <TextInput onSubmitEditing={searchHandler} value={keyword} onChangeText={setKeyword} style={styles.searchInput}></TextInput>
       </View>
-      <FilmList style={styles.filmList} filmList={searchFilms.items}></FilmList>
+      <FilmList style={styles.filmList} filmList={searchFilms}></FilmList>
       <View style={styles.bottom}>
-        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore}></Pagination>
+        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
     </View>
   );

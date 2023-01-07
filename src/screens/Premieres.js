@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import FilmList from '../components/FilmList';
 import Pagination from '../components/Pagination';
 import { useActions } from '../hooks/useActions';
-import { fetchPopularFilms, fetchPremieres } from '../services/MovietonService';
+import { fetchPremieres } from '../services/MovietonService';
 
 const Premieres = () => {
   const dispatch = useDispatch();
-
   const viewRef = useRef();
-  const filmList = useSelector((state) => state.premieres.items);
-  const pagination = useSelector((state) => state.pagination.page);
 
+  const pagination = useSelector((state) => state.pagination.page);
   const { setPagination } = useActions();
+
+  const filmList = useSelector((state) => state.premieres.items);
+  const totalPages = useSelector((state) => state.premieres.totalPages);
 
   const handleClickNext = () => {
     setPagination(Number(pagination + 1));
@@ -34,7 +35,7 @@ const Premieres = () => {
       <Text style={styles.label}>Премьеры: </Text>
       <FilmList filmList={filmList}></FilmList>
       <View style={styles.bottom}>
-        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore}></Pagination>
+        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
     </View>
   );

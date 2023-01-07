@@ -11,7 +11,7 @@ const Populars = () => {
   const viewRef = useRef();
 
   const filmList = useSelector((state) => state.popularFilms.items);
-
+  const totalPages = useSelector((state) => state.popularFilms.totalPages);
   const pagination = useSelector((state) => state.pagination.page);
 
   const { setPagination } = useActions();
@@ -36,7 +36,7 @@ const Populars = () => {
       <Text style={styles.label}>Популярное: </Text>
       <FilmList filmList={filmList}></FilmList>
       <View style={styles.bottom}>
-        <Pagination style={styles.bottom} pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore}></Pagination>
+        <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
     </View>
   );
