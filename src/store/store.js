@@ -8,13 +8,15 @@ import { premieresReducer } from './reducers/films/premieres';
 import { searchFilmsReducer } from './reducers/films/searchFilms';
 import { paginationReducer } from './reducers/pagination';
 import { topFilmsReducer } from './reducers/films/topFilms';
+import { filtersReducer } from './reducers/filters';
 
 const rootReducer = combineReducers({
   popularFilms: popularFilmsReducer,
   premieres: premieresReducer,
   searchFilms: searchFilmsReducer,
   pagination: paginationReducer,
-  topFilms: topFilmsReducer
+  topFilms: topFilmsReducer,
+  filters: filtersReducer
 });
 
 const configureStore = () => {

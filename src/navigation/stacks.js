@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homescreen from '../screens/Homescreen/Homescreen';
-import Search from '../screens/Search';
+import Search from '../screens/Search/Search';
 import Film from '../screens/Film';
 import Populars from '../screens/Populars';
 import Premieres from '../screens/Premieres';
