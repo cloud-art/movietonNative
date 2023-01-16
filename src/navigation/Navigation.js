@@ -67,11 +67,9 @@ export default function Navigation() {
         <Tab.Screen
           name="Поиск"
           component={SearchStackScreen}
-          options={
-            {
-              // headerShown: false
-            }
-          }
+          options={{
+            headerShown: false
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>

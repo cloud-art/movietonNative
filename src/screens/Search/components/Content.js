@@ -22,12 +22,12 @@ export default function Content() {
   };
 
   return (
-    <View style={styles.content}>
+    <>
       <FilmList style={styles.filmList} filmList={searchFilms}></FilmList>
       <View style={styles.bottom}>
         <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -35,6 +35,5 @@ const styles = StyleSheet.create({
   content: { width: '100%' },
   top: { display: 'flex', flexDirection: 'column', width: '100%' },
   filmList: { alignSelf: 'center' },
-  searchInput: { height: '70px', width: '100%', paddingLeft: '10px', paddingRight: '10px', marginRight: '5px', marginBottom: '5px', borderColor: '0A1C34', borderWidth: '1px' },
   bottom: { alignSelf: 'center' }
 });

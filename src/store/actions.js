@@ -9,9 +9,10 @@ import {
   SET_FRONT_PREMIERES,
   SET_FILTERS_GENRE,
   SET_FILTERS_RATINGS,
-  SET_FILTERS_RELEASE,
+  SET_FILTERS_ORDER,
   SET_FILTERS_YEARS,
-  FILTERS_RESET
+  FILTERS_RESET,
+  SET_GENRES
 } from './constants';
 
 export function setPagination(page) {
@@ -76,9 +77,9 @@ export function setFiltersGenre(items) {
     payload: items
   };
 }
-export function setFiltersRelease(items) {
+export function setFiltersOrder(items) {
   return {
-    type: SET_FILTERS_RELEASE,
+    type: SET_FILTERS_ORDER,
     payload: items
   };
 }
@@ -91,5 +92,12 @@ export function setFiltersYears(items) {
 export function filtersReset() {
   return {
     type: FILTERS_RESET
+  };
+}
+
+export function setGenres(items) {
+  return {
+    type: SET_GENRES,
+    payload: items
   };
 }

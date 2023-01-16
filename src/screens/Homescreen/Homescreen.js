@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFrontPremieres, fetchPopularFrontFilms, fetchTopFrontFilms } from '../../services/MovietonService';
+import { fetchFrontPremieres, fetchGenres, fetchPopularFrontFilms, fetchTopFrontFilms } from '../../services/MovietonService';
 import ItemsTail from './components/ItemsTail';
 
 export default function Homescreen() {

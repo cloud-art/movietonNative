@@ -1,4 +1,4 @@
-import { setFrontPremiers, setPopularFilms, setPopularFilmsLastYear, setPopularFrontFilms, setPremieres, setSearchFilms, setSearchFrontFilms, setTopFilms, setTopFrontFilms } from '../store/actions';
+import { setFrontPremiers, setGenres, setPopularFilms, setPopularFrontFilms, setPremieres, setSearchFilms, setTopFilms, setTopFrontFilms } from '../store/actions';
 
 import { FILMS_URL, API_URLV2_2, API_KEY } from './constants';
 
@@ -53,15 +53,18 @@ export const fetchTopFilms = (page) => {
   };
 };
 
-export const fetchSearchFilms = (page, keyword) => {
+export const fetchSearchFilms = (filters, page, keyword) => {
   return function (dispatch) {
-    fetch(`${API_URLV2_2}${FILMS_URL}/?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&keyword=${keyword}&page=${page}`, {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': API_KEY,
-        'Content-Type': 'application/json'
+    fetch(
+      `${API_URLV2_2}${FILMS_URL}/?genres=${filters.genre}&order=${filters.order}&type=ALL&ratingFrom=${filters.rating[0]}&ratingTo=${filters.rating[1]}&yearFrom=${filters.year[0]}&yearTo=${filters.year[1]}&keyword=${keyword}&page=${page}`,
+      {
+        method: 'GET',
+        headers: {
+          'X-API-KEY': API_KEY,
+          'Content-Type': 'application/json'
+        }
       }
-    })
+    )
       .then((res) => res.json())
       .then((json) => {
         dispatch(setSearchFilms(json));
@@ -116,6 +119,23 @@ export const fetchTopFrontFilms = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(setTopFrontFilms(json));
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const fetchGenres = () => {
+  return function (dispatch) {
+    fetch(`${API_URLV2_2}${FILMS_URL}/filters`, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': API_KEY,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(setGenres(json));
       })
       .catch((err) => console.log(err));
   };

@@ -9,6 +9,7 @@ import { searchFilmsReducer } from './reducers/films/searchFilms';
 import { paginationReducer } from './reducers/pagination';
 import { topFilmsReducer } from './reducers/films/topFilms';
 import { filtersReducer } from './reducers/filters';
+import { genresReducer } from './reducers/genres';
 
 const rootReducer = combineReducers({
   popularFilms: popularFilmsReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   searchFilms: searchFilmsReducer,
   pagination: paginationReducer,
   topFilms: topFilmsReducer,
-  filters: filtersReducer
+  filters: filtersReducer,
+  genres: genresReducer
 });
 
 const configureStore = () => {
