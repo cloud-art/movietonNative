@@ -1,9 +1,22 @@
-import { setFrontPremiers, setGenres, setPopularFilms, setPopularFrontFilms, setPremieres, setSearchFilms, setTopFilms, setTopFrontFilms } from '../store/actions';
+import {
+  setFrontPremiers,
+  setGenres,
+  setPopularFilms,
+  setPopularFrontFilms,
+  setPremieres,
+  setSearchFilms,
+  setTopFilms,
+  setTopFrontFilms,
+  togglePopularIsFetching,
+  toggleSearchIsFetching,
+  toggleTopIsFetching
+} from '../store/actions';
 
 import { FILMS_URL, API_URLV2_2, API_KEY } from './constants';
 
 export const fetchPopularFilms = (page) => {
   return function (dispatch) {
+    dispatch(togglePopularIsFetching(true));
     fetch(`${API_URLV2_2}${FILMS_URL}?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&page=${page}`, {
       method: 'GET',
       headers: {
@@ -13,6 +26,7 @@ export const fetchPopularFilms = (page) => {
     })
       .then((res) => res.json())
       .then((json) => {
+        dispatch(togglePopularIsFetching(false));
         dispatch(setPopularFilms(json));
       })
       .catch((err) => console.log(err));
@@ -38,6 +52,7 @@ export const fetchPremieres = (page) => {
 
 export const fetchTopFilms = (page) => {
   return function (dispatch) {
+    dispatch(toggleTopIsFetching(true));
     fetch(`${API_URLV2_2}${FILMS_URL}/top?type=TOP_250_BEST_FILMS&page=${page}`, {
       method: 'GET',
       headers: {
@@ -47,6 +62,7 @@ export const fetchTopFilms = (page) => {
     })
       .then((res) => res.json())
       .then((json) => {
+        dispatch(toggleTopIsFetching(false));
         dispatch(setTopFilms(json));
       })
       .catch((err) => console.log(err));
@@ -55,6 +71,7 @@ export const fetchTopFilms = (page) => {
 
 export const fetchSearchFilms = (filters, page, keyword) => {
   return function (dispatch) {
+    dispatch(toggleSearchIsFetching(true));
     fetch(
       `${API_URLV2_2}${FILMS_URL}/?genres=${filters.genre}&order=${filters.order}&type=ALL&ratingFrom=${filters.rating[0]}&ratingTo=${filters.rating[1]}&yearFrom=${filters.year[0]}&yearTo=${filters.year[1]}&keyword=${keyword}&page=${page}`,
       {
@@ -67,6 +84,7 @@ export const fetchSearchFilms = (filters, page, keyword) => {
     )
       .then((res) => res.json())
       .then((json) => {
+        dispatch(toggleSearchIsFetching(false));
         dispatch(setSearchFilms(json));
       })
       .catch((err) => console.log(err));

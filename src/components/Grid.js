@@ -6,7 +6,7 @@ import NotFoundText from './NotFoundText';
 const Grid = ({ films, keyGenerateWord }) => {
   return (
     <>
-      {films.length > 0 ? (
+      {films.length > 0 && (
         <View style={styles.grid}>
           {films.map((e) => {
             return (
@@ -28,9 +28,8 @@ const Grid = ({ films, keyGenerateWord }) => {
             );
           })}
         </View>
-      ) : (
-        <NotFoundText></NotFoundText>
       )}
+      {!(films.length > 0) && <NotFoundText></NotFoundText>}
     </>
   );
 };

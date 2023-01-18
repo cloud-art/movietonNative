@@ -3,7 +3,8 @@ import { SET_FRONT_PREMIERES, SET_PREMIERES } from '../../constants';
 const initialState = {
   items: [],
   totalPages: 1,
-  frontItems: []
+  frontItems: [],
+  isFetching: false
 };
 
 export const premieresReducer = (state = initialState, action) => {

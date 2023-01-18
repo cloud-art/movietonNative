@@ -46,7 +46,6 @@ const Filters = ({}) => {
     setFiltersYears(year);
     setFiltersOrder(sort);
     setFiltersGenre(genre);
-    console.log(genres);
   });
 
   return (

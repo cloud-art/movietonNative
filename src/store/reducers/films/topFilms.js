@@ -1,9 +1,10 @@
-import { SET_TOP_FILMS, SET_TOP_FRONT_FILMS } from '../../constants';
+import { SET_TOP_FILMS, SET_TOP_FRONT_FILMS, TOGGLE_TOP_IS_FETCHING } from '../../constants';
 
 const initialState = {
   items: [],
   frontItems: [],
-  totalPages: 1
+  totalPages: 1,
+  isFetching: false
 };
 
 export const topFilmsReducer = (state = initialState, action) => {
@@ -19,6 +20,8 @@ export const topFilmsReducer = (state = initialState, action) => {
         ...state,
         frontItems: [...action.payload.films]
       };
+    case TOGGLE_TOP_IS_FETCHING:
+      return { ...state, isFetching: action.payload };
     default:
       return state;
   }

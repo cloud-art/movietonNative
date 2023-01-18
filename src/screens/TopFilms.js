@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import FilmList from '../components/FilmList';
 import Pagination from '../components/Pagination';
+import Spinner from '../components/Spinner';
 import { useActions } from '../hooks/useActions';
 import { fetchPopularFilms, fetchTopFilms } from '../services/MovietonService';
 
@@ -13,6 +14,7 @@ const TopFilms = () => {
   const filmList = useSelector((state) => state.topFilms.items);
   const totalPages = useSelector((state) => state.topFilms.totalPages);
   const pagination = useSelector((state) => state.pagination.page);
+  const isFetching = useSelector((state) => state.topFilms.isFetching);
 
   const { setPagination } = useActions();
 
@@ -34,7 +36,13 @@ const TopFilms = () => {
   return (
     <View ref={viewRef} style={styles.container}>
       <Text style={styles.label}>Топ фильмов: </Text>
-      <FilmList filmList={filmList}></FilmList>
+      {isFetching ? (
+        <View style={styles.spinner}>
+          <Spinner styles={{ height: '200px' }} />
+        </View>
+      ) : (
+        <FilmList filmList={filmList}></FilmList>
+      )}
       <View style={styles.bottom}>
         <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
@@ -58,7 +66,8 @@ const styles = StyleSheet.create({
   filmProps: { marginLeft: '20px' },
   filmPropsLabel: { padding: '5px', fontSize: '22px', fontWeight: 'bold' },
   filmPropsText: { fontSize: '18px' },
-  bottom: { alignSelf: 'center' }
+  bottom: { alignSelf: 'center' },
+  spinner: { alignSelf: 'center' }
 });
 
 export default TopFilms;

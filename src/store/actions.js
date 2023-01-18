@@ -12,7 +12,10 @@ import {
   SET_FILTERS_ORDER,
   SET_FILTERS_YEARS,
   FILTERS_RESET,
-  SET_GENRES
+  SET_GENRES,
+  TOGGLE_SEARCH_IS_FETCHING,
+  TOGGLE_TOP_IS_FETCHING,
+  TOGGLE_POPULAR_IS_FETCHING
 } from './constants';
 
 export function setPagination(page) {
@@ -99,5 +102,24 @@ export function setGenres(items) {
   return {
     type: SET_GENRES,
     payload: items
+  };
+}
+
+export function toggleSearchIsFetching(isFetching) {
+  return {
+    type: TOGGLE_SEARCH_IS_FETCHING,
+    payload: isFetching
+  };
+}
+export function togglePopularIsFetching(isFetching) {
+  return {
+    type: TOGGLE_POPULAR_IS_FETCHING,
+    payload: isFetching
+  };
+}
+export function toggleTopIsFetching(isFetching) {
+  return {
+    type: TOGGLE_TOP_IS_FETCHING,
+    payload: isFetching
   };
 }

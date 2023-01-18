@@ -1,9 +1,10 @@
-import { SET_POPULAR_FILMS, SET_POPULAR_FRONT_FILMS } from '../../constants';
+import { SET_POPULAR_FILMS, SET_POPULAR_FRONT_FILMS, TOGGLE_POPULAR_IS_FETCHING } from '../../constants';
 
 const initialStatePopularFilms = {
   items: [],
   totalPages: 1,
-  frontItems: []
+  frontItems: [],
+  isFetching: false
 };
 
 export const popularFilmsReducer = (state = initialStatePopularFilms, action) => {
@@ -19,6 +20,8 @@ export const popularFilmsReducer = (state = initialStatePopularFilms, action) =>
         ...state,
         frontItems: [...action.payload.items]
       };
+    case TOGGLE_POPULAR_IS_FETCHING:
+      return { ...state, isFetching: action.payload };
     default:
       return state;
   }

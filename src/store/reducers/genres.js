@@ -1,7 +1,8 @@
 import { SET_GENRES } from '../constants';
 
 const initialState = {
-  genres: [{ key: '', value: 'Все жанры' }]
+  genres: [{ key: '', value: 'Все жанры' }],
+  isFetching: false
 };
 
 export const genresReducer = (state = initialState, action) => {
