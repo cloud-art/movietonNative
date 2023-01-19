@@ -4,8 +4,8 @@ import Homescreen from '../screens/Homescreen/Homescreen';
 import Search from '../screens/Search/Search';
 import Film from '../screens/Film';
 import Populars from '../screens/Populars';
-import Premieres from '../screens/Premieres';
 import TopFilms from '../screens/TopFilms';
+import NewFilms from '../screens/NewFilms';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -34,8 +34,8 @@ function HomeStackScreen() {
         }}
       />
       <HomeStack.Screen
-        name="Premieres"
-        component={Premieres}
+        name="NewFilms"
+        component={NewFilms}
         options={{
           headerShown: false
         }}

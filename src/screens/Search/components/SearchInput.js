@@ -3,9 +3,9 @@ import { View } from 'react-native-web';
 
 const SearchInput = ({ keyword, setKeyword, handleSearch }) => {
   return (
-    <View>
+    <>
       <TextInput onSubmitEditing={handleSearch} value={keyword} onChangeText={setKeyword} style={styles.searchInput}></TextInput>
-    </View>
+    </>
   );
 };
 

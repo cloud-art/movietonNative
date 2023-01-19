@@ -11,7 +11,7 @@ export const genresReducer = (state = initialState, action) => {
       return {
         ...state,
         genres: state.genres.concat(
-          action.payload.genres.map((e) => {
+          action.payload.map((e) => {
             return { key: e.id, value: e.genre };
           })
         )

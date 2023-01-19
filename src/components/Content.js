@@ -1,18 +1,18 @@
-import { StyleSheet, View } from 'react-native';
-
-import Pagination from '../../../components/Pagination';
-import FilmList from '../../../components/FilmList';
-import { useActions } from '../../../hooks/useActions';
+import { StyleSheet } from 'react-native';
+import { View } from 'react-native-web';
 import { useSelector } from 'react-redux';
-import Spinner from '../../../components/Spinner';
+import { useActions } from '../hooks/useActions';
+import FilmList from './FilmList';
+import Pagination from './Pagination';
+import Spinner from './Spinner';
 
-export default function Content() {
+const Content = ({ data }) => {
   const pagination = useSelector((state) => state.pagination.page);
   const { setPagination } = useActions();
 
-  const totalPages = useSelector((state) => state.searchFilms.totalPages);
-  const searchFilms = useSelector((state) => state.searchFilms.items);
-  const isFetching = useSelector((state) => state.searchFilms.isFetching);
+  const totalPages = data.totalPages;
+  const filmList = data.items;
+  const isFetching = data.isFetching;
 
   const handleClickNext = () => {
     setPagination(Number(pagination + 1));
@@ -30,14 +30,14 @@ export default function Content() {
           <Spinner styles={{ height: '200px' }} />
         </View>
       ) : (
-        <FilmList style={styles.filmList} filmList={searchFilms}></FilmList>
+        <FilmList style={styles.filmList} filmList={filmList}></FilmList>
       )}
       <View style={styles.bottom}>
         <Pagination pagination={pagination} handleClickNext={handleClickNext} handleClickBefore={handleClickBefore} totalPages={totalPages}></Pagination>
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: { width: '100%' },
@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
   bottom: { alignSelf: 'center' },
   spinner: { alignSelf: 'center' }
 });
+
+export default Content;

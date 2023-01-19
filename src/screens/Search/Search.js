@@ -4,21 +4,20 @@ import { StyleSheet, View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGenres, fetchSearchFilms } from '../../services/MovietonService';
 import SearchInput from './components/SearchInput';
-import Content from './components/Content';
 import Filters from '../../components/Filters/Filters';
+import Content from '../../components/Content';
 
 export default function Search() {
   const dispatch = useDispatch();
-  const viewRef = useRef();
 
   const [keyword, setKeyword] = useState('');
 
+  const data = useSelector((state) => state.searchFilms);
   const filters = useSelector((state) => state.filters);
   const pagination = useSelector((state) => state.pagination.page);
 
   const handleSearch = () => {
     dispatch(fetchSearchFilms(filters, pagination, keyword));
-    viewRef.current.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -30,14 +29,12 @@ export default function Search() {
   }, []);
 
   return (
-    <View ref={viewRef} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.top}>
         <SearchInput keyword={keyword} setKeyword={setKeyword} handleSearch={handleSearch}></SearchInput>
         <Filters></Filters>
       </View>
-      <View style={styles.content}>
-        <Content></Content>
-      </View>
+      <Content data={data}></Content>
     </View>
   );
 }
@@ -53,6 +50,5 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height
   },
-  top: { display: 'flex', flexDirection: 'column', width: '100%' },
-  content: { width: '100%' }
+  top: { display: 'flex', flexDirection: 'column', width: '100%' }
 });

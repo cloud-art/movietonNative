@@ -1,22 +1,22 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Content from '../components/Content';
-import { fetchPopularFilms } from '../services/MovietonService';
+import { fetchNewFilms, fetchPopularFilms } from '../services/MovietonService';
 
-const Populars = () => {
+const NewFilms = () => {
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.popularFilms);
+  const data = useSelector((state) => state.newFilms);
   const pagination = useSelector((state) => state.pagination.page);
 
   useEffect(() => {
-    dispatch(fetchPopularFilms(pagination));
+    dispatch(fetchNewFilms(pagination));
   }, [pagination]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Популярное: </Text>
+      <Text style={styles.label}>Новинки: </Text>
       <Content data={data}></Content>
     </View>
   );
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   label: { fontSize: '28px', alignSelf: 'center' }
 });
 
-export default Populars;
+export default NewFilms;

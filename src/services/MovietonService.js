@@ -1,12 +1,17 @@
 import {
-  setFrontPremiers,
+  setFilms,
   setGenres,
+  setNewFilms,
+  setNewFrontFilms,
+  setNewPages,
   setPopularFilms,
   setPopularFrontFilms,
-  setPremieres,
+  setPopularPages,
   setSearchFilms,
+  setSearchPages,
   setTopFilms,
   setTopFrontFilms,
+  toggleNewIsFetching,
   togglePopularIsFetching,
   toggleSearchIsFetching,
   toggleTopIsFetching
@@ -27,24 +32,28 @@ export const fetchPopularFilms = (page) => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(togglePopularIsFetching(false));
-        dispatch(setPopularFilms(json));
+        dispatch(setPopularFilms(json.items));
+        dispatch(setPopularPages(json.totalPages));
       })
       .catch((err) => console.log(err));
   };
 };
 
-export const fetchPremieres = (page) => {
+export const fetchNewFilms = (page) => {
   return function (dispatch) {
-    fetch(`${API_URLV2_2}${FILMS_URL}/premieres?page=${page}&year=${2023}&month=${'JANUARY'}`, {
+    dispatch(toggleNewIsFetching(true));
+    fetch(`${API_URLV2_2}${FILMS_URL}?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&page=${page}`, {
       method: 'GET',
       headers: {
-        'X-API-KEY': API_KEY,
+        'X-API-KEY': '5b334fb3-43d9-4391-96d9-4333cbe171be',
         'Content-Type': 'application/json'
       }
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch(setPremieres(json));
+        dispatch(toggleNewIsFetching(false));
+        dispatch(setNewFilms(json.items));
+        dispatch(setNewPages(json.totalPages));
       })
       .catch((err) => console.log(err));
   };
@@ -63,7 +72,7 @@ export const fetchTopFilms = (page) => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(toggleTopIsFetching(false));
-        dispatch(setTopFilms(json));
+        dispatch(setTopFilms(json.films));
       })
       .catch((err) => console.log(err));
   };
@@ -85,7 +94,8 @@ export const fetchSearchFilms = (filters, page, keyword) => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(toggleSearchIsFetching(false));
-        dispatch(setSearchFilms(json));
+        dispatch(setSearchFilms(json.items));
+        dispatch(setSearchPages(json.totalPages));
       })
       .catch((err) => console.log(err));
   };
@@ -102,13 +112,13 @@ export const fetchPopularFrontFilms = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch(setPopularFrontFilms(json));
+        dispatch(setPopularFrontFilms(json.items));
       })
       .catch((err) => console.log(err));
   };
 };
 
-export const fetchFrontPremieres = () => {
+export const fetchNewFrontFilms = () => {
   return function (dispatch) {
     fetch(`${API_URLV2_2}${FILMS_URL}/premieres?page=1&year=${2023}&month=${'JANUARY'}`, {
       method: 'GET',
@@ -119,7 +129,7 @@ export const fetchFrontPremieres = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch(setFrontPremiers(json));
+        dispatch(setNewFrontFilms(json.items));
       })
       .catch((err) => console.log(err));
   };
@@ -136,7 +146,7 @@ export const fetchTopFrontFilms = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch(setTopFrontFilms(json));
+        dispatch(setTopFrontFilms(json.films));
       })
       .catch((err) => console.log(err));
   };
@@ -153,7 +163,7 @@ export const fetchGenres = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch(setGenres(json));
+        dispatch(setGenres(json.genres));
       })
       .catch((err) => console.log(err));
   };
