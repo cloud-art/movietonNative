@@ -18,6 +18,7 @@ import {
 } from '../store/actions';
 
 import { FILMS_URL, API_URLV2_2, API_KEY } from './constants';
+import { getCurrentYear } from '../helpers/getCurrentYear';
 
 export const fetchPopularFilms = (page) => {
   return function (dispatch) {
@@ -42,7 +43,7 @@ export const fetchPopularFilms = (page) => {
 export const fetchNewFilms = (page) => {
   return function (dispatch) {
     dispatch(toggleNewIsFetching(true));
-    fetch(`${API_URLV2_2}${FILMS_URL}?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&page=${page}`, {
+    fetch(`${API_URLV2_2}${FILMS_URL}?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&yearFrom=${getCurrentYear()}&yearTo=${getCurrentYear()}&page=${page}`, {
       method: 'GET',
       headers: {
         'X-API-KEY': '5b334fb3-43d9-4391-96d9-4333cbe171be',
@@ -120,7 +121,7 @@ export const fetchPopularFrontFilms = () => {
 
 export const fetchNewFrontFilms = () => {
   return function (dispatch) {
-    fetch(`${API_URLV2_2}${FILMS_URL}/premieres?page=1&year=${2023}&month=${'JANUARY'}`, {
+    fetch(`${API_URLV2_2}${FILMS_URL}?order=NUM_VOTE&type=FILM&ratingFrom=7&ratingTo=10&yearFrom=${getCurrentYear()}&yearTo=${getCurrentYear()}&page=1`, {
       method: 'GET',
       headers: {
         'X-API-KEY': API_KEY,
@@ -129,6 +130,7 @@ export const fetchNewFrontFilms = () => {
     })
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         dispatch(setNewFrontFilms(json.items));
       })
       .catch((err) => console.log(err));
