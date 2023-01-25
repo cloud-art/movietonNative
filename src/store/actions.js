@@ -21,13 +21,22 @@ import {
   SET_POPULAR_PAGES,
   SET_NEW_PAGES,
   SET_TOP_PAGES,
-  SET_SEARCH_PAGES
+  SET_SEARCH_PAGES,
+  SET_FILM,
+  TOGGLE_FILM_IS_FETCHING
 } from './constants';
 
 export function setPagination(page) {
   return {
     type: SET_PAGINATION,
     payload: page
+  };
+}
+
+export function setFilm(film) {
+  return {
+    type: SET_FILM,
+    payload: film
   };
 }
 
@@ -163,6 +172,12 @@ export function togglePopularIsFetching(isFetching) {
 export function toggleTopIsFetching(isFetching) {
   return {
     type: TOGGLE_TOP_IS_FETCHING,
+    payload: isFetching
+  };
+}
+export function toggleFilmIsFetching(isFetching) {
+  return {
+    type: TOGGLE_FILM_IS_FETCHING,
     payload: isFetching
   };
 }

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Content from '../components/Content';
-import { fetchNewFilms, fetchPopularFilms } from '../services/MovietonService';
+import { fetchNewFilms } from '../services/MovietonService';
 
 const NewFilms = () => {
   const dispatch = useDispatch();

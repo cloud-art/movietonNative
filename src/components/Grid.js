@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
-import { Link } from '@react-navigation/native';
-import Dotdotdot from 'react-clamp';
+import { StyleSheet, View } from 'react-native';
 import NotFoundText from './NotFoundText';
+import FilmsItem from './FilmItem';
 
 const Grid = ({ films, keyGenerateWord }) => {
   return (
@@ -9,23 +8,7 @@ const Grid = ({ films, keyGenerateWord }) => {
       {films.length > 0 && (
         <View style={styles.grid}>
           {films.map((e) => {
-            return (
-              <View style={styles.gridElement} key={films.length + e.kinopoiskId ? e.kinopoiskId : e.filmId}>
-                <Link to={{ screen: 'Film', params: { film: e } }}>
-                  <Image
-                    style={styles.img}
-                    source={{
-                      uri: e.posterUrlPreview
-                    }}
-                  />
-                </Link>
-                <Dotdotdot clamp="2">
-                  <Link to={{ screen: 'Film', params: { film: e } }}>
-                    <Text style={styles.item}>{e.nameRu ? e.nameRu : e.nameOriginal}</Text>
-                  </Link>
-                </Dotdotdot>
-              </View>
-            );
+            return <FilmsItem id={e.kinopoiskId} image={e.posterUrlPreview} nameRu={e.nameRu} nameOriginal={e.nameOriginal} />;
           })}
         </View>
       )}

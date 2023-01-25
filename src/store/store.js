@@ -10,8 +10,10 @@ import { topFilmsReducer } from './reducers/films/topFilms';
 import { filtersReducer } from './reducers/filters';
 import { genresReducer } from './reducers/genres';
 import { newFilmsReducer } from './reducers/films/newFilms';
+import { filmReducer } from './reducers/films/film';
 
 const rootReducer = combineReducers({
+  film: filmReducer,
   popularFilms: popularFilmsReducer,
   newFilms: newFilmsReducer,
   searchFilms: searchFilmsReducer,
