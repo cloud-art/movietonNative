@@ -3,7 +3,6 @@ import NotFoundText from './NotFoundText';
 import FilmsItem from './FilmItem';
 
 const FilmList = ({ filmList }) => {
-  console.log(filmList);
   return (
     <>
       {filmList.length > 0 ? (

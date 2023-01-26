@@ -94,7 +94,6 @@ export const fetchTopFilms = (page) => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(toggleTopIsFetching(false));
-        console.log(json);
         dispatch(setTopFilms(json.films));
         dispatch(setTopPages(json.pagesCount));
       })
@@ -153,7 +152,6 @@ export const fetchNewFrontFilms = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         dispatch(setNewFrontFilms(json.items));
       })
       .catch((err) => console.log(err));
