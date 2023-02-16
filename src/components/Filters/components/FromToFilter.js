@@ -32,7 +32,7 @@ const FromToFilter = ({ value, onChange, min, max }) => {
 };
 
 const styles = StyleSheet.create({
-  inputs: { width: '100%', outline: 'none', display: 'flex', flexDirection: 'row' },
+  inputs: { width: '100%', display: 'flex', flexDirection: 'row' },
   input: { margin: '5px' },
   filterActive: {},
   textinput: {

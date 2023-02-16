@@ -1,12 +1,12 @@
 import { SET_FILM, TOGGLE_FILM_IS_FETCHING } from '../../constants';
+import undefinedImage from '../../../assets/icon.png';
 
 const initialState = {
   id: -1,
   genres: [],
   nameRu: 'undefined',
   nameOriginal: 'undefined',
-  image:
-    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.archgard.com%2Fassets%2Fupload_fallbacks%2Fimage_not_found-54bf2d65c203b1e48fea1951497d4f689907afe3037d02a02dcde5775746765c.png&f=1&nofb=1&ipt=35200c6024bde2bd603629545d5a8809792a0dae41f529402166ed6fb557f2e7&ipo=images',
+  image: undefinedImage,
   year: 1967,
   rating: 1,
   description: 'undefined',

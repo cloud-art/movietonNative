@@ -14,7 +14,7 @@ const Filter = ({ name, children }) => {
 };
 
 const styles = StyleSheet.create({
-  filter: { width: '100%', outline: 'none', display: 'flex', flexDirection: 'column' },
+  filter: { width: '100%', display: 'flex', flexDirection: 'column' },
   filterActive: {},
   content: {},
   label: {

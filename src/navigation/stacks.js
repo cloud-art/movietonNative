@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homescreen from '../screens/Homescreen/Homescreen';
 import Search from '../screens/Search/Search';
-import Film from '../screens/Film';
+import Film from '../screens/Film/Film';
 import Populars from '../screens/Populars';
 import TopFilms from '../screens/TopFilms';
 import NewFilms from '../screens/NewFilms';
